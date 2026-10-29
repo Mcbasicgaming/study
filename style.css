@@ -1,0 +1,286 @@
+
+/* CUSTOM SCROLLBAR */
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+
+/* DOCUMENT PAGE */
+
+.word-page {
+    box-sizing: border-box;
+    width: 794px;
+    max-width: 100%;
+    height: 1123px;
+    min-height: 1123px;
+    padding: 48px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    flex-shrink: 0;
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 20px -2px rgba(0, 0, 0, 0.08),
+        0 2px 6px -1px rgba(0, 0, 0, 0.04);
+
+    border-radius: 8px;
+}
+
+
+/* EDITABLE PAGE CONTENT */
+
+.editor-page-content {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+
+    outline: none;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+
+    /* Keep content inside the fixed-size page */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.editor-page-content:focus {
+    outline: none;
+}
+
+.editor-page-content p {
+    margin-bottom: 0.75rem;
+}
+
+.editor-page-content h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+}
+
+.editor-page-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 0.85rem;
+    margin-bottom: 0.4rem;
+    color: #334155;
+}
+
+.editor-page-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 0.75rem;
+    margin-bottom: 0.3rem;
+    color: #475569;
+}
+
+.editor-page-content ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.editor-page-content ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.editor-page-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.editor-page-content th,
+.editor-page-content td {
+    border: 1px solid #cbd5e1;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.editor-page-content th {
+    background-color: #f1f5f9;
+}
+
+.editor-page-content blockquote {
+    border-left: 4px solid #3b82f6;
+    padding-left: 1rem;
+    color: #64748b;
+    font-style: italic;
+    margin: 1rem 0;
+}
+
+
+/* IMAGE EDITING */
+
+.editor-page-content img {
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+    resize: both;
+    overflow: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px 0;
+    object-fit: contain;
+}
+
+.editor-page-content img.selected-editor-image {
+    outline: 2px solid #3b82f6;
+    outline-offset: 3px;
+}
+
+
+/* DOCUMENT FOOTER */
+
+.document-footer {
+    flex-shrink: 0;
+
+    margin-top: 16px;
+    padding-top: 15px;
+
+    border-top: 1px solid #f1f5f9;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    font-size: 12px;
+    color: #94a3b8;
+    user-select: none;
+}
+
+
+/* PAGE STACK */
+
+#editorPages {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+
+    padding: 8px 0 40px;
+}
+
+#editorPages .word-page {
+    margin: 0;
+}
+
+
+/* RESPONSIVE DOCUMENT */
+
+@media (max-width: 640px) {
+
+    .word-page {
+        width: 100%;
+        height: 900px;
+        min-height: 900px;
+        padding: 24px;
+    }
+
+    #editorPages {
+        gap: 18px;
+    }
+
+}
+
+
+/* GLASS EFFECT */
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+}
+
+
+/* PRINT DOCUMENT */
+
+@media print {
+
+    body {
+        background: white !important;
+    }
+
+    header,
+    #pageHome,
+    #pageSubject,
+    #mathModal,
+    #toast,
+    #pageEditor > div:first-child,
+    #pageEditor > div:nth-child(2) {
+        display: none !important;
+    }
+
+    #pageEditor {
+        display: block !important;
+    }
+
+    #editorPages {
+        display: block !important;
+        padding: 0 !important;
+        gap: 0 !important;
+    }
+
+    .word-page {
+        box-sizing: border-box;
+        width: 210mm;
+        height: 297mm;
+        min-height: 297mm;
+        max-width: none;
+
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+
+        margin: 0;
+        padding: 20mm;
+
+        page-break-after: always;
+        break-after: page;
+
+        overflow: hidden;
+    }
+
+    .word-page:last-child {
+        page-break-after: auto;
+        break-after: auto;
+    }
+
+    .editor-page-content {
+        overflow: hidden !important;
+    }
+
+    .editor-page-content img {
+        outline: none !important;
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+}
